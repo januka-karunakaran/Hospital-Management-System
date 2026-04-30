@@ -45,3 +45,9 @@ A full-stack Hospital Management System designed to manage patients, doctors, ap
 ---
 
 ## 📂 Project Structure
+Hospital-Management-System/
+│
+├── frontend/ # Next.js / React app
+├── backend/ # Spring Boot / FastAPI backend
+├── database/ # MongoDB configs / scripts
+└── README.md

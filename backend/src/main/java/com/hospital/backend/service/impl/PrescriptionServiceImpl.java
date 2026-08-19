@@ -11,6 +11,7 @@ import com.hospital.backend.repository.AppointmentRepository;
 import com.hospital.backend.repository.DoctorRepository;
 import com.hospital.backend.repository.PatientRepository;
 import com.hospital.backend.repository.PrescriptionRepository;
+import com.hospital.backend.service.NotificationService;
 import com.hospital.backend.service.PrescriptionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
     private final AppointmentRepository appointmentRepository;
     private final DoctorRepository doctorRepository;
     private final PatientRepository patientRepository;
+    private final NotificationService notificationService;
 
     @Override
     public Prescription createPrescription(PrescriptionRequest request) {
@@ -54,13 +56,28 @@ public class PrescriptionServiceImpl implements PrescriptionService {
                 .appointmentId(request.getAppointmentId())
                 .doctorId(request.getDoctorId())
                 .patientId(request.getPatientId())
+                .diagnosis(request.getDiagnosis())
                 .medicines(request.getMedicines())
                 .notes(request.getNotes())
                 .dosageInstructions(request.getDosageInstructions())
                 .createdAt(LocalDateTime.now().toString())
                 .build();
 
-        return prescriptionRepository.save(prescription);
+        Prescription savedPrescription = prescriptionRepository.save(prescription);
+
+        // Send notification to patient about new prescription
+        try {
+            notificationService.notifyPrescriptionCreated(
+                    savedPrescription.getId(),
+                    request.getPatientId(),
+                    request.getDoctorId()
+            );
+        } catch (Exception e) {
+            // Log but don't fail prescription creation if notification fails
+            System.err.println("Failed to send prescription notification: " + e.getMessage());
+        }
+
+        return savedPrescription;
     }
 
     @Override

@@ -19,6 +19,7 @@ public class Appointment {
 
     private String appointmentDate; // example: 2026-04-20
     private String appointmentTime; // example: 10:30 AM
+    private Integer tokenNumber; // Daily queue number for this doctor
 
     private String reason;
     private String status; // PENDING / APPROVED / REJECTED / COMPLETED

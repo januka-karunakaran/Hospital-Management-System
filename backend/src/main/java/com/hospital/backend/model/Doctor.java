@@ -14,6 +14,8 @@ import java.util.List;
 public class Doctor {
 
     @Id
+    private String id;
+
     private String userId;
 
     private String fullName;
@@ -23,4 +25,6 @@ public class Doctor {
     private Integer experienceYears;
     private List<String> availableDays;
     private String status; // ACTIVE / INACTIVE
+    private Double rating; // Average rating from patients (0-5)
+    private Integer totalRatings; // Number of ratings received
 }

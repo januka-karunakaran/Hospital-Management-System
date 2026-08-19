@@ -18,6 +18,8 @@ public class PrescriptionRequest {
     @NotBlank(message = "Patient ID is required")
     private String patientId;
 
+    private String diagnosis;
+
     @NotEmpty(message = "Medicines list cannot be empty")
     private List<String> medicines;
 

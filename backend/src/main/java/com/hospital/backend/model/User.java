@@ -29,6 +29,17 @@ public class User implements UserDetails {
     private String password;
     private Role role;
 
+    // Profile fields
+    private String phoneNumber;
+    private String address;
+    private String city;
+    private String state;
+    private String zipCode;
+    private String photoUrl;
+    private String bio;
+    private String specialization; // For doctors
+    private String licenseNumber;  // For doctors
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority("ROLE_" + role.name()));

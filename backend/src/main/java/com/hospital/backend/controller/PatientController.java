@@ -1,5 +1,6 @@
 package com.hospital.backend.controller;
 
+import com.hospital.backend.dto.MedicalRecordDTO;
 import com.hospital.backend.dto.PatientRequest;
 import com.hospital.backend.model.Patient;
 import com.hospital.backend.security.SecurityUtils;
@@ -48,5 +49,20 @@ public class PatientController {
     public ResponseEntity<Patient> getMyProfile() {
         String email = SecurityUtils.getCurrentUserEmail();
         return ResponseEntity.ok(patientService.getMyProfile(email));
+    }
+
+    @GetMapping("/{id}/history")
+    public ResponseEntity<List<MedicalRecordDTO>> getMedicalHistory(@PathVariable String id) {
+        return ResponseEntity.ok(patientService.getMedicalHistory(id));
+    }
+
+    @PostMapping("/{id}/family")
+    public ResponseEntity<Patient> addFamilyMember(@PathVariable String id, @RequestBody Patient.FamilyMember member) {
+        return ResponseEntity.ok(patientService.addFamilyMember(id, member));
+    }
+
+    @GetMapping("/{id}/family")
+    public ResponseEntity<List<Patient.FamilyMember>> getFamilyMembers(@PathVariable String id) {
+        return ResponseEntity.ok(patientService.getFamilyMembers(id));
     }
 }

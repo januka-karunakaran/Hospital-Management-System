@@ -21,6 +21,7 @@ public class Prescription {
     private String patientId;
 
     private List<String> medicines;
+    private String diagnosis;
     private String notes;
     private String dosageInstructions;
     private String createdAt;

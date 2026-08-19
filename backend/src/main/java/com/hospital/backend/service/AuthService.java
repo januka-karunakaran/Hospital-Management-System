@@ -7,4 +7,7 @@ import com.hospital.backend.dto.SignupRequest;
 public interface AuthService {
     String signup(SignupRequest request);
     AuthResponse login(LoginRequest request);
+    void sendSignupOtp(String email);
+    void requestPasswordReset(String email);
+    void resetPassword(String token, String password);
 }

@@ -8,4 +8,5 @@ import java.util.List;
 public interface DoctorRepository extends MongoRepository<Doctor, String> {
     List<Doctor> findBySpecialization(String specialization);
     Optional<Doctor> findByEmail(String email);
+    Optional<Doctor> findByUserId(String userId);
 }

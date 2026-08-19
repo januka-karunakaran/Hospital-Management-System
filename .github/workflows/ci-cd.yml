@@ -4,6 +4,7 @@ on:
   pull_request:
   push:
     branches:
+      - Januka
       - main
 
 permissions:
@@ -83,7 +84,7 @@ jobs:
 
   publish-images:
     name: Publish Docker images
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/Januka' || github.ref == 'refs/heads/main')
     needs:
       - backend
       - frontend
